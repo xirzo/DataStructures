@@ -1,4 +1,8 @@
-add_library(graph ${CMAKE_CURRENT_SOURCE_DIR}/src/graph.c)
+add_library(graph 
+    ./src/graph.c
+    ./src/component.c
+    ./src/dfs.c
+)
 
 target_include_directories(graph
     PRIVATE
