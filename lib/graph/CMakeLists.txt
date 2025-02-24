@@ -1,7 +1,8 @@
 add_library(graph 
-    ./src/graph.c
     ./src/component.c
     ./src/dfs.c
+    ./src/graph.c
+    ./src/topological_sort.c
 )
 
 target_include_directories(graph
