@@ -21,16 +21,14 @@ struct dfs_data {
 struct graph* create_graph(const size_t number_of_vertices);
 void free_graph(struct graph* self);
 
-void add_edge(struct graph* self, size_t start, size_t end);
+void add_oriented_edge(struct graph* self, size_t start, size_t end);
+void add_non_oriented_edge(struct graph* self, size_t start, size_t end);
 void print_graph(struct graph* self);
 
 struct dfs_data* create_dfs_data(const size_t number_of_vertices);
 void free_dfs_data(struct dfs_data* data);
 
 void dfs(struct graph* self, struct dfs_data* data, size_t vertice);
-
-void dfs_component(struct graph* self, size_t* component, size_t vertice,
-                   size_t num_flag);
 
 struct components {
     size_t number_of_components;

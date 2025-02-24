@@ -34,11 +34,21 @@ void free_graph(struct graph* self) {
     free(self);
 }
 
-void add_edge(struct graph* self, size_t start, size_t end) {
+void add_oriented_edge(struct graph* self, size_t start, size_t end) {
     struct vertice* v1 = (struct vertice*)((char*)self->vertices->data +
                                            start * self->vertices->element_size);
 
     push_back_vector(v1->adjacent, &end);
+}
+
+void add_non_oriented_edge(struct graph* self, size_t start, size_t end) {
+    struct vertice* v1 = (struct vertice*)((char*)self->vertices->data +
+                                           start * self->vertices->element_size);
+
+    struct vertice* v2 = (struct vertice*)((char*)self->vertices->data +
+                                           end * self->vertices->element_size);
+    push_back_vector(v1->adjacent, &end);
+    push_back_vector(v2->adjacent, &start);
 }
 
 void print_graph(struct graph* self) {
