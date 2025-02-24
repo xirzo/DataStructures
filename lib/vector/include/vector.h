@@ -15,5 +15,6 @@ void free_vector(struct vector* self);
 
 void insert_vector(struct vector* self, void* data, size_t index);
 void push_back_vector(struct vector* self, void* data);
+void reverse_vector(struct vector* self);
 
 #endif  // !VECTOR_
