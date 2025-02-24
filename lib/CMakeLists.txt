@@ -1,2 +1,2 @@
-add_library(samplelib sample.c sample.h)
-
+add_subdirectory(graph)
+add_subdirectory(vector)
