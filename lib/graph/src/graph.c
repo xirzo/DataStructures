@@ -12,10 +12,23 @@ struct graph* create_graph(const size_t number_of_vertices) {
 
     graph->vertices = create_vector(sizeof(struct vertice));
 
-    for (size_t i = 0; i < number_of_vertices + 1; ++i) {
+    struct vertice dummy;
+    dummy.adjacent = create_vector(sizeof(size_t));
+    {
+        size_t dummy_val = 0;
+        push_back_vector(dummy.adjacent, &dummy_val);
+    }
+    push_back_vector(graph->vertices, &dummy);
+
+    for (size_t i = 1; i <= number_of_vertices; ++i) {
         struct vertice v;
 
         v.adjacent = create_vector(sizeof(size_t));
+
+        {
+            size_t dummy_val = 0;
+            push_back_vector(v.adjacent, &dummy_val);
+        }
 
         push_back_vector(graph->vertices, &v);
     }
@@ -24,9 +37,9 @@ struct graph* create_graph(const size_t number_of_vertices) {
 }
 
 void free_graph(struct graph* self) {
-    for (size_t i = 0; i < self->vertices->length; ++i) {
-        struct vertice* v =
-            (struct vertice*)(self->vertices->data + i * self->vertices->element_size);
+    for (size_t i = 1; i < self->vertices->length; ++i) {
+        struct vertice* v = (struct vertice*)((char*)self->vertices->data +
+                                              i * self->vertices->element_size);
         free_vector(v->adjacent);
     }
 
@@ -38,13 +51,11 @@ void print_graph(struct graph* self) {
     for (size_t i = 1; i < self->vertices->length; ++i) {
         struct vertice* v = (struct vertice*)((char*)self->vertices->data +
                                               i * self->vertices->element_size);
+        printf("Vertice #%zu:\n", i);
 
-        printf("Vertice #%zu: \n", i);
-
-        for (size_t j = 0; j < v->adjacent->length; ++j) {
+        for (size_t j = 1; j < v->adjacent->length; ++j) {
             printf("%zu ", ((size_t*)v->adjacent->data)[j]);
         }
-
         printf("\n");
     }
 }

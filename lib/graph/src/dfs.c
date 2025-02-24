@@ -26,8 +26,9 @@ void dfs(struct graph* self, struct dfs_data* data, size_t vertice) {
     struct vertice* v = (struct vertice*)((char*)self->vertices->data +
                                           vertice * self->vertices->element_size);
 
-    for (size_t i = 0; i < v->adjacent->length; ++i) {
-        size_t* adjacent = (size_t*)(v->adjacent->data + sizeof(size_t) * i);
+    for (size_t i = 1; i < v->adjacent->length; ++i) {
+        size_t* adjacent =
+            (size_t*)((char*)v->adjacent->data + i * v->adjacent->element_size);
 
         if (!data->visited[*adjacent]) {
             dfs(self, data, *adjacent);
