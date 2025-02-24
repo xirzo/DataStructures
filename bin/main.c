@@ -5,24 +5,28 @@
 #include "graph.h"
 
 int main(int argc, char* argv[]) {
-    const size_t NUMBER_OF_VERTICIES = 6;
+    const size_t NUMBER_OF_VERTICES = 6;
 
-    struct graph* graph = create_graph(NUMBER_OF_VERTICIES);
+    struct graph* graph = create_graph(NUMBER_OF_VERTICES);
 
     add_edge(graph, 1, 2);
-    add_edge(graph, 3, 2);
-    add_edge(graph, 4, 2);
-    add_edge(graph, 2, 5);
+    add_edge(graph, 2, 1);
+    add_edge(graph, 3, 4);
+    add_edge(graph, 4, 3);
+    add_edge(graph, 5, 6);
     add_edge(graph, 6, 5);
-    add_edge(graph, 4, 6);
 
     print_graph(graph);
 
-    struct dfs_data* data = create_dfs_data(NUMBER_OF_VERTICIES);
+    struct components* components = find_components(graph);
 
-    dfs(graph, data, 2);
+    printf("Number of components: %zu\n", components->number_of_components);
 
-    free_dfs_data(data);
+    for (size_t i = 1; i <= NUMBER_OF_VERTICES; ++i) {
+        printf("Vertice #%zu is in %zu component\n", i, components->component[i]);
+    }
+
+    free_components(components);
     free_graph(graph);
 
     return EXIT_SUCCESS;

@@ -29,4 +29,16 @@ void free_dfs_data(struct dfs_data* data);
 
 void dfs(struct graph* self, struct dfs_data* data, size_t vertice);
 
+void dfs_component(struct graph* self, size_t* component, size_t vertice,
+                   size_t num_flag);
+
+struct components {
+    size_t number_of_components;
+    size_t* component;
+};
+
+void free_components(struct components* components);
+
+struct components* find_components(struct graph* self);
+
 #endif  // !GRAPH_H
